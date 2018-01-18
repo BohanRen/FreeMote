@@ -188,6 +188,7 @@ namespace FreeMote.PsBuild
             switch (spec)
             {
                 case PsbSpec.krkr:
+                case PsbSpec.ems:
                     return PsbCompressType.RL;
                 case PsbSpec.common:
                 case PsbSpec.win:
@@ -315,7 +316,22 @@ namespace FreeMote.PsBuild
             {
                 return;
             }
+
+            bool isCommonAlternative = false;
+            var realTargetSpec = PsbSpec.common;
+
             var original = psb.Platform;
+            if (original == PsbSpec.ems)
+            {
+                original = PsbSpec.common;
+            }
+
+            if (targetSpec == PsbSpec.ems)
+            {
+                isCommonAlternative = true;
+                realTargetSpec = targetSpec;
+                targetSpec = PsbSpec.common;
+            }
 
             if (targetSpec == PsbSpec.krkr) //krkr can not select pixel format
             {
@@ -339,7 +355,7 @@ namespace FreeMote.PsBuild
                 }
             }
 
-            if (targetSpec == PsbSpec.win)
+            else if (targetSpec == PsbSpec.win)
             {
                 switch (original)
                 {
@@ -357,7 +373,7 @@ namespace FreeMote.PsBuild
                 }
             }
 
-            if (targetSpec == PsbSpec.common)
+            else if (targetSpec == PsbSpec.common || targetSpec == PsbSpec.ems)
             {
                 switch (original)
                 {
@@ -369,10 +385,24 @@ namespace FreeMote.PsBuild
                         CommonWinConverter commonWin = new CommonWinConverter();
                         commonWin.Convert(psb);
                         break;
+                    case PsbSpec.common:
+                    case PsbSpec.ems:
+                        psb.Platform = targetSpec;
+                        break;
                     default:
                         psb.Platform = targetSpec;
                         break;
                 }
+            }
+
+            else
+            {
+                psb.Platform = targetSpec;
+            }
+
+            if (isCommonAlternative)
+            {
+                psb.Platform = realTargetSpec;
             }
         }
     }
