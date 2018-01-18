@@ -4,6 +4,23 @@
 
 namespace FreeMote
 {
+    public enum PsbType
+    {
+        /// <summary>
+        /// Motion
+        /// </summary>
+        Motion = 0,
+        /// <summary>
+        /// Images
+        /// </summary>
+        Pimg = 1,
+        /// <summary>
+        /// Script
+        /// </summary>
+        /// TODO: KS decompiler?
+        Scn = 2,
+    }
+
     /// <summary>
     /// PSB Platform
     /// </summary>
@@ -53,5 +70,13 @@ namespace FreeMote
         /// Big Endian DXT5
         /// </summary>
         DXT5,
+        /// <summary>
+        /// Unsupport
+        /// </summary>
+        A8L8,
+        /// <summary>
+        /// Unsupport
+        /// </summary>
+        L8,
     }
 }
