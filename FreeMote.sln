@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeMote.Psb", "FreeMote.Psb\FreeMote.Psb.csproj", "{C0B2C2FF-D8F4-497E-8312-C2AF1BB6E7F7}"
 EndProject
@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeMote.Tools.PsBuild", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeMote.Psd", "FreeMote.Psd\FreeMote.Psd.csproj", "{F79E4CF4-4E1D-4C4D-AEE4-B84611CAEAC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoShop", "C:\Users\admin\Documents\Visual Studio 2017\Projects\PsdPlugin\PhotoShopFileType\PhotoShop.csproj", "{A04EEDD9-E164-4941-9846-722ACF2FCCA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paint.NET.PhotoShop", "C:\Users\admin\Documents\Visual Studio 2017\Projects\PsdPlugin\PhotoShopFileType\Paint.NET.PhotoShop.csproj", "{A04EEDD9-E164-4941-9846-722ACF2FCCA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

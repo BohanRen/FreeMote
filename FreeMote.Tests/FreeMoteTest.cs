@@ -196,5 +196,34 @@ namespace FreeMote.Tests
                 
             RL.ConvertToImageFile(bts, "rgba4444.png", 2048, 2048, PsbImageFormat.Png, PsbPixelFormat.RGBA4444);
         }
+
+        [TestMethod]
+        public void TestZlibUncompress()
+        {
+            var resPath = Path.Combine(Environment.CurrentDirectory, @"..\..\Res");
+            //var path = Path.Combine(resPath, "emote39_171221.emttmpl");
+            var path = Path.Combine(resPath, "ca.psz");
+            var bytes = File.ReadAllBytes(path);
+            //using (var ms = new MemoryStream(bytes.Skip(10).ToArray()))
+            using (var ms = new MemoryStream(bytes.Skip(18).ToArray()))
+            {
+                var result = ZlibCompress.Uncompress(ms);
+                File.WriteAllBytes(path+".mmo", result);
+            }
+        }
+
+        [TestMethod]
+        public void TestZlibCompress()
+        {
+            var resPath = Path.Combine(Environment.CurrentDirectory, @"..\..\Res");
+            var path = Path.Combine(resPath, "emote39_171221.emttmpl.mmo");
+            var bytes = File.ReadAllBytes(path);
+            var bytes2 = File.ReadAllBytes(Path.Combine(resPath, "emote39_171221.emttmpl")).Skip(8).ToArray();
+            //using (var ms = new MemoryStream(bytes.Skip(10).ToArray()))
+            using (var ms = new MemoryStream(bytes.ToArray()))
+            {
+                var result = ZlibCompress.Compress(ms, false);
+            }
+        }
     }
 }

@@ -42,9 +42,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\admin\Documents\Visual Studio 2017\Projects\PsdPlugin\PhotoShopFileType\PhotoShop.csproj">
+    <ProjectReference Include="C:\Users\admin\Documents\Visual Studio 2017\Projects\PsdPlugin\PhotoShopFileType\Paint.NET.PhotoShop.csproj">
       <Project>{a04eedd9-e164-4941-9846-722acf2fcca1}</Project>
-      <Name>PhotoShop</Name>
+      <Name>Paint.NET.PhotoShop</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -348,7 +348,7 @@ namespace FreeMote.Tests
             var path = Path.Combine(resPath, "title.pimg");
             var json = PsbDecompiler.Decompile(path, out var psb);
         }
-
+        
         [TestMethod]
         public void TestCompileMenuPsb()
         {
@@ -356,6 +356,19 @@ namespace FreeMote.Tests
 
             var path = Path.Combine(resPath, "title.psb.json");
             PsbCompiler.CompileToFile(path, path + ".psbuild.psb", null, 2);
+        }
+
+        [TestMethod]
+        public void TestDecompileMmo()
+        {
+            var resPath = Path.Combine(Environment.CurrentDirectory, @"..\..\Res");
+            var path = Path.Combine(resPath, "emote39_171221.mmo");
+            var json = PsbDecompiler.Decompile(path, out var psb);
+            var resources = psb.CollectResources();
+            foreach (var resourceMetadata in resources)
+            {
+                var data = resourceMetadata.Data;
+            }
         }
 
         [TestMethod]

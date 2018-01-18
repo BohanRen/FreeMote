@@ -110,7 +110,7 @@ namespace FreeMote.PsBuild
         }
 
         private string DebuggerString =>
-            $"{(string.IsNullOrWhiteSpace(Part) ? "" : Part + "/")}{Name}({Width}*{Height}){(Compress == PsbCompressType.RL ? "[RL]" : "")}";
+            $"{(string.IsNullOrWhiteSpace(Part) ? "" : (Part + "/"))}{Name}({Width}*{Height}){(Compress == PsbCompressType.RL ? "[RL]" : "")}";
 
         /// <summary>
         /// Convert Resource to Image
