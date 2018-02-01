@@ -74,10 +74,6 @@ namespace FreeMote.Psb
         public PSB(ushort version = 3)
         {
             Header = new PsbHeader { Version = version };
-            if (Header.Version > 2)
-            {
-                Header.HeaderEncrypt = 1;
-            }
         }
 
         public PSB(string path)
@@ -106,7 +102,7 @@ namespace FreeMote.Psb
         /// <returns></returns>
         public PsbType InferType()
         {
-            if (Objects.Any(k=> k.Key.Contains(".tlg")))
+            if (Objects.Any(k=> k.Key.Contains(".") && k.Value is PsbResource))
             {
                 return PsbType.Pimg;
             }
@@ -131,6 +127,17 @@ namespace FreeMote.Psb
 
         private void LoadFromStream(Stream stream)
         {
+            var sig = new byte[4];
+            stream.Read(sig, 0, 4);
+            if (Encoding.ASCII.GetString(sig).ToUpperInvariant().StartsWith("MDF"))
+            {
+                stream.Seek(6, SeekOrigin.Current); //Original Length (4 bytes) | Compression Header (78 9C||DA)
+                stream = ZlibCompress.UncompressToStream(stream);
+            }
+            else
+            {
+                stream.Seek(-4, SeekOrigin.Current);
+            }
             BinaryReader br = new BinaryReader(stream, Encoding.UTF8);
 
             //Load Header
@@ -498,7 +505,7 @@ namespace FreeMote.Psb
             {
                 switch (obj)
                 {
-                    case PsbResource r:
+                    case PsbResource _:
                         break;
                     case PsbString s:
                         if (Strings.Contains(s))

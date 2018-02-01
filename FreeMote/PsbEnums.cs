@@ -7,15 +7,15 @@ namespace FreeMote
     public enum PsbType
     {
         /// <summary>
-        /// Motion
+        /// Motion (psb)
         /// </summary>
         Motion = 0,
         /// <summary>
-        /// Images
+        /// Images (pimg, dpak)
         /// </summary>
         Pimg = 1,
         /// <summary>
-        /// Script
+        /// Script (scn)
         /// </summary>
         /// TODO: KS decompiler?
         Scn = 2,
@@ -78,5 +78,25 @@ namespace FreeMote
         /// Unsupport
         /// </summary>
         L8,
+    }
+
+    public enum EncodeMode
+    {
+        Encrypt,
+        Decrypt,
+    }
+
+    public enum EncodePosition
+    {
+        Body,
+        Header,
+        Full,
+        /// <summary>
+        /// Automata
+        /// <para>if encrypt v3-V4, will only encrypt header.</para>
+        /// <para>if encrypt v2, will only encrypt body(strings).</para>
+        /// <para>if decrypt, clean header and body both.</para>
+        /// </summary>
+        Auto
     }
 }
