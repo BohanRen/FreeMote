@@ -350,7 +350,8 @@ namespace FreeMote.PsBuild
                     case PsbDictionary dictionary:
                         return dictionary[name];
                     case PsbCollection collection:
-                        col = collection.FirstOrDefault(c => c is PsbDictionary);
+                        col = collection.FirstOrDefault(c => c is PsbDictionary d && d.ContainsKey(name)) ??
+                              collection.FirstOrDefault(c => c is IPsbCollection);
                         continue;
                 }
                 throw new ArgumentException($"{col} doesn't have children.");
