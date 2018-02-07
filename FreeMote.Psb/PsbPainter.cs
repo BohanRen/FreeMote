@@ -13,6 +13,7 @@ namespace FreeMote.Psb
     /// </summary>
     public class PsbPainter
     {
+        public const string GroupMark = "■";
         public PSB Source { get; set; }
         public List<ResourceMetadata> Resources{ get; private set; } = new List<ResourceMetadata>();
 
@@ -95,7 +96,7 @@ namespace FreeMote.Psb
                 }
             }
 
-            Resources.Sort((md1, md2) => (int) ((md1.ZIndex - md2.ZIndex) * 100));
+            Resources = Resources.OrderBy(md => md.ZIndex).ThenBy(md => md.Part).ThenBy(md => md.Name).ToList(); //.Sort((md1, md2) => (int) ((md1.ZIndex - md2.ZIndex) * 100));
 
             //Travel
             void Travel(IPsbCollection collection, (float x, float y, float z)? baseLocation, bool baseVisible = true)
@@ -104,6 +105,7 @@ namespace FreeMote.Psb
                 {
                     if (dic.ContainsKey("frameList") && dic["frameList"] is PsbCollection col)
                     {
+                        var labelName = dic["label"].ToString();
                         //Collect Locations
                         var coordObj = col
                             .Where(o => o is PsbDictionary d && d.ContainsKey("content") &&
@@ -159,7 +161,11 @@ namespace FreeMote.Psb
                                     if (baseLocation != null && res != null && !Resources.Contains(res))
                                     {
                                         var location = baseLocation.Value;
-                                        //Console.WriteLine($"Locate {partName}/{iconName} at {location.x},{location.y},{location.z}");
+                                        res.Label = labelName;
+                                        dic.GetPartAndName(out var objPart, out var objName);
+                                        res.ObjPart = objPart;
+                                        res.ObjName = objName;
+                                        Debug.WriteLine($"Locate {res.Part}/{res.Name}({res.Label}) at {location.x},{location.y},{location.z}");
                                         res.OriginX = location.x;
                                         res.OriginY = location.y;
                                         res.ZIndex = location.z;
@@ -188,7 +194,11 @@ namespace FreeMote.Psb
                                     if (baseLocation != null && res != null && !Resources.Contains(res))
                                     {
                                         var location = baseLocation.Value;
-                                        //Console.WriteLine($"Locate {partName}/{iconName} at {location.x},{location.y},{location.z}");
+                                        res.Label = labelName;
+                                        dic.GetPartAndName(out var objPart, out var objName);
+                                        res.ObjPart = objPart;
+                                        res.ObjName = objName;
+                                        Debug.WriteLine($"Locate {res.Part}/{res.Name}({res.Label}) at {location.x},{location.y},{location.z}");
                                         res.OriginX = location.x;
                                         res.OriginY = location.y;
                                         res.ZIndex = location.z;

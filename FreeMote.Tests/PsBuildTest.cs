@@ -202,10 +202,10 @@ namespace FreeMote.Tests
 
             //var path = Path.Combine(resPath, "dx_e-mote3.0ショコラパジャマa-pure.psb.json");
             //var path = Path.Combine(resPath, "ca01_l_body_1.psz.psb-pure.psb.json");
-            var path = Path.Combine(resPath, "e-mote38_win-pure.psb.json");
+            var path = Path.Combine(resPath, "ca01_l_body_1.psz.psb-pure.psb");
             //var path = Path.Combine(resPath, "akira_guide-pure.psb.json");
             //PSB psb = PsbCompiler.LoadPsbFromJsonFile(path);
-            PSB psb = new PSB("emote_krkr2win.psb");
+            PSB psb = new PSB(path);
             psb.SplitTextureToFiles("texs");
         }
 

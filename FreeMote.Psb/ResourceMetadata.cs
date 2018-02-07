@@ -39,11 +39,11 @@ namespace FreeMote.Psb
     public class ResourceMetadata
     {
         /// <summary>
-        /// Name 1
+        /// Src Part
         /// </summary>
         public string Part { get; set; }
         /// <summary>
-        /// Name 2
+        /// Src Name
         /// </summary>
         public string Name { get; set; }
 
@@ -85,7 +85,10 @@ namespace FreeMote.Psb
         /// <summary>
         /// Additional Name
         /// </summary>
-        public string Description { get; set; }
+        public string Label { get; set; }
+
+        public string ObjPart { get; set; }
+        public string ObjName { get; set; }
 
         public int Opacity { get; set; } = 10;
         public bool Visible { get; set; } = true;

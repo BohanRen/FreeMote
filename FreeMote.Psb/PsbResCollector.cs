@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 
 namespace FreeMote.Psb
@@ -337,6 +338,40 @@ namespace FreeMote.Psb
             return psbObj[path];
         }
 
+        /// <summary>
+        /// Get part and name from <see cref="IPsbChild.Path"/>
+        /// </summary>
+        /// <param name="col"></param>
+        /// <param name="part"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool GetPartAndName(this IPsbChild col, out string part, out string name)
+        {
+            part = name = null;
+            var path = col.Path;
+            if (string.IsNullOrEmpty(path))
+            {
+                return false;
+            }
+
+            if (path.StartsWith("/object") || path.StartsWith("/source"))
+            {
+                var ps = path.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                if (ps.Length < 2)
+                {
+                    return false;
+                }
+                part = ps[1];
+                if (ps.Length >= 4)
+                {
+                    name = ps[3];
+                }
+                return true;
+            }
+
+            return false;
+        }
+
         public static IPsbValue Children(this IPsbValue col, string name)
         {
             while (true)
@@ -354,6 +389,6 @@ namespace FreeMote.Psb
             }
         }
 
-       
+
     }
 }

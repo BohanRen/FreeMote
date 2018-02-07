@@ -79,5 +79,34 @@ namespace FreeMote.Tests
                 }
             }
         }
+
+        [TestMethod]
+        public void TestPsdBuildKrkr()
+        {
+            var resPath = Path.Combine(Environment.CurrentDirectory, @"..\..\Res");
+            var path = Path.Combine(resPath, "澄怜a_裸-pure.psb");
+            Psb2PsdConverter converter = new Psb2PsdConverter(new PSB(path));
+            converter.ConvertToPsd(1500, 3800).Save(path + ".psd", Encoding.UTF8);
+            Console.WriteLine();
+        }
+
+        [TestMethod]
+        public void TestPsdBuildWin()
+        {
+            var resPath = Path.Combine(Environment.CurrentDirectory, @"..\..\Res");
+            var path = Path.Combine(resPath, "ca01-pure.psb");
+            Psb2PsdConverter converter = new Psb2PsdConverter(new PSB(path));
+            converter.ConvertToPsd(1600, 2000).Save(path + ".psd", Encoding.UTF8);
+            Console.WriteLine();
+        }
+
+        [TestMethod]
+        public void TestPsdLoadBuilt()
+        {
+            var resPath = Path.Combine(Environment.CurrentDirectory, @"..\..\Res");
+            var path = Path.Combine(resPath, "澄怜a_裸-pure.psb.psd");
+            PsdFile file = new PsdFile(path, new LoadContext());
+            var layers = file.Layers;
+        }
     }
 }

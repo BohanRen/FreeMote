@@ -728,8 +728,18 @@ namespace FreeMote.Psb
 
         public IPsbCollection Parent { get; set; } = null;
 
-        public string Path => Parent != null ? $"{Parent.Path}{(Parent.Path.EndsWith("/") ? "" : "/")}{this.GetName() ?? "(array)"}" : "/";
-
+        public string Path
+        {
+            get
+            {
+                if (Parent != null)
+                {
+                    var path = Parent.Path;
+                    return $"{path}{(path.EndsWith("/") ? "" : "/")}{this.GetName() ?? "(array)"}";
+                }
+                return "/";
+            }
+        }
 
         IPsbValue IPsbCollection.this[int i] => ContainsKey(i.ToString()) ? base[i.ToString()] : null;
 
@@ -758,7 +768,18 @@ namespace FreeMote.Psb
 
         public IPsbCollection Parent { get; set; } = null;
 
-        public string Path => Parent != null ? $"{Parent.Path}{(Parent.Path.EndsWith("/") ? "" : "/")}{this.GetName() ?? "(array)"}" : "/";
+        public string Path
+        {
+            get
+            {
+                if (Parent != null)
+                {
+                    var path = Parent.Path;
+                    return $"{path}{(path.EndsWith("/") ? "" : "/")}{this.GetName() ?? "(array)"}";
+                }
+                return "/";
+            }
+        }
 
         public new IPsbValue this[int index]
         {
