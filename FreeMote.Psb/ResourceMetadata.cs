@@ -2,10 +2,8 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using FreeMote.Psb;
 
-
-namespace FreeMote.PsBuild
+namespace FreeMote.Psb
 {
     /// <summary>
     /// Compression in PSB
@@ -75,11 +73,22 @@ namespace FreeMote.PsBuild
         public int Left { get; set; }
         public float OriginX { get; set; }
         public float OriginY { get; set; }
-        public string Type { get; set; }
+        public string Type => TypeString?.Value;
         public PsbString TypeString { get; set; }
         public RectangleF Clip { get; set; }
         public PsbResource Resource { get; set; }
         public byte[] Data => Resource?.Data;
+        /// <summary>
+        /// Additional z-index info
+        /// </summary>
+        public float ZIndex { get; set; }
+        /// <summary>
+        /// Additional Name
+        /// </summary>
+        public string Description { get; set; }
+
+        public int Opacity { get; set; } = 10;
+        public bool Visible { get; set; } = true;
 
         /// <summary>
         /// Platform
@@ -87,30 +96,7 @@ namespace FreeMote.PsBuild
         /// </summary>
         public PsbSpec Spec { get; set; } = PsbSpec.other;
 
-        public PsbPixelFormat PixelFormat
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Type))
-                {
-                    return PsbPixelFormat.None;
-                }
-                switch (Type.ToUpperInvariant())
-                {
-                    case "DXT5":
-                        return PsbPixelFormat.DXT5;
-                    case "RGBA8":
-                        if (Spec == PsbSpec.common || Spec == PsbSpec.ems)
-                            return PsbPixelFormat.CommonRGBA8;
-                        else
-                            return PsbPixelFormat.WinRGBA8;
-                    case "RGBA4444":
-                        return PsbPixelFormat.RGBA4444;
-                        default:
-                        return PsbPixelFormat.None;
-                }
-            }
-        }
+        public PsbPixelFormat PixelFormat => Type.ToPsbPixelFormat(Spec);
 
         private string DebuggerString =>
             $"{(string.IsNullOrWhiteSpace(Part) ? "" : (Part + "/"))}{Name}({Width}*{Height}){(Compress == PsbCompressType.RL ? "[RL]" : "")}";

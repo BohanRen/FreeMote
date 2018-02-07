@@ -51,6 +51,30 @@ namespace FreeMote
         Png,
     }
 
+    /// <summary>
+    /// How to handle images when decompiling
+    /// </summary>
+    public enum PsbImageOption
+    {
+        /// <summary>
+        /// Keep original
+        /// </summary>
+        Original,
+        /// <summary>
+        /// Uncompress if needed
+        /// </summary>
+        Uncompress,
+        /// <summary>
+        /// Compress if needed
+        /// </summary>
+        Compress,
+        /// <summary>
+        /// Try to convert to common image format
+        /// </summary>
+        Extract,
+
+    }
+
     public enum PsbPixelFormat
     {
         None,
@@ -63,9 +87,9 @@ namespace FreeMote
         /// </summary>
         CommonRGBA8,
         /// <summary>
-        /// RGBA4444
+        /// Little Endian RGBA4444
         /// </summary>
-        RGBA4444,
+        WinRGBA4444,
         /// <summary>
         /// Big Endian DXT5
         /// </summary>
