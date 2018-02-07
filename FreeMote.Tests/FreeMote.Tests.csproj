@@ -77,8 +77,8 @@
       <Project>{d43ca425-6476-4ae3-a3d8-bbcac0f0383c}</Project>
       <Name>FreeMote</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\admin\Documents\Visual Studio 2017\Projects\PsdPlugin\PhotoShopFileType\Paint.NET.PhotoShop.csproj">
-      <Project>{A04EEDD9-E164-4941-9846-722ACF2FCCA1}</Project>
+    <ProjectReference Include="..\Psd\PhotoShopFileType\Paint.NET.PhotoShop.csproj">
+      <Project>{a04eedd9-e164-4941-9846-722acf2fcca1}</Project>
       <Name>Paint.NET.PhotoShop</Name>
     </ProjectReference>
   </ItemGroup>

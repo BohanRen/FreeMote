@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeMote.Tools.PsBuild", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeMote.Psd", "FreeMote.Psd\FreeMote.Psd.csproj", "{F79E4CF4-4E1D-4C4D-AEE4-B84611CAEAC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paint.NET.PhotoShop", "C:\Users\admin\Documents\Visual Studio 2017\Projects\PsdPlugin\PhotoShopFileType\Paint.NET.PhotoShop.csproj", "{A04EEDD9-E164-4941-9846-722ACF2FCCA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paint.NET.PhotoShop", "Psd\PhotoShopFileType\Paint.NET.PhotoShop.csproj", "{A04EEDD9-E164-4941-9846-722ACF2FCCA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

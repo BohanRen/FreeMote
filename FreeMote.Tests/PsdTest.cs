@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using FreeMote.Psb;
+using FreeMote.PsBuild;
 using FreeMote.Psd;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PhotoshopFile;
@@ -31,13 +34,26 @@ namespace FreeMote.Tests
                 testContextInstance = value;
             }
         }
-        
+
         [TestMethod]
         public void TestPsdLoad()
         {
             var resPath = Path.Combine(Environment.CurrentDirectory, @"..\..\Res");
-            var path = Path.Combine(resPath, "e-mote38基本テンプレート(正面zバイナリ専用)_free.psd");
+            var path = Path.Combine(resPath, "e-mote38_free.psd");
             PsdFile file = new PsdFile(path, new LoadContext());
+
+            Bitmap bmp = new Bitmap("Monarch.png");
+            Layer psdLayer = new Layer(file);
+            // Set layer metadata
+            psdLayer.Name = "Monarch";
+            psdLayer.Rect = new Rectangle(new Point(100, 100), bmp.Size);
+            psdLayer.BlendModeKey = PsdBlendMode.Normal;
+            psdLayer.Opacity = 255;
+            psdLayer.Visible = true;
+            psdLayer.Masks = new MaskInfo();
+            psdLayer.BlendingRangesData = new BlendingRanges(psdLayer);
+            psdLayer.SetBitmap(bmp);
+            file.Layers.Add(psdLayer);
 
             foreach (var fileLayer in file.Layers)
             {
